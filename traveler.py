@@ -27,4 +27,19 @@ def user_prompt():
 
 	return (start_page, end_page)
 
-print(user_prompt())
+def main():
+	pages = user_prompt()
+	curr = wikiepdia.page(pages[0])
+	target = wikiepdia.page(pages[1])
+
+	search(curr, target)
+
+def search(curr, target):
+	path = []
+
+	while not base_case(curr, target):
+
+
+
+def base_case(curr, target):
+
