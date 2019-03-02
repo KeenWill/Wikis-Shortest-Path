@@ -40,6 +40,5 @@ def search(curr, target):
 	while not base_case(curr, target):
 
 
-
 def base_case(curr, target):
 
