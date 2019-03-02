@@ -3,7 +3,7 @@ import spacy
 
 def clean(page_text):
 	nlp = spacy.load('en_core_web_md')
-	doc = nlp(wikipedia.page(page_text))
+	doc = nlp(wikipedia.page(page_text).content)
 	filtered_text = []
 	for token in doc:
 		if token.pos_ == "NUM" or token.pos_ == "PROPN" or token.pos_ == "NOUN":
@@ -12,6 +12,7 @@ def clean(page_text):
 		    #else:
 		    filtered_text.append(token)
 	return filtered_text
+
 
 #class filter:
 #	page_name = ""
