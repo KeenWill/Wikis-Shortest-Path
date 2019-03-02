@@ -1,6 +1,7 @@
 import wikipedia
 from filter import clean
 import spacy
+from concurrent.futures import ThreadPoolExecutor
 
 #Prompts user for the start and end pages, and returns in a tuple
 def user_prompt():
@@ -86,7 +87,6 @@ def find_best_page(pages, target_words, target):
 def score(page_name, target_words):
 	#list of filtered tokens from page summary
 	curr_words = clean(page_name)
-
 	score = 0
 	for curr_token in curr_words:
 		for target_token in target_words:
@@ -95,13 +95,23 @@ def score(page_name, target_words):
 	#adjust the weight by page length
 	if len(curr_words) != 0:
 		score = score / len(curr_words)
+
+	print(page_name, score)
+
 	return score
 
 
+
+def execute():
+	search(pages[0], pages[1])
+
 def main():
+	executor = ThreadPoolExecutor(max_workers = 10)
+	task1 = executor.submit(execute)
+
+
+if __name__ == '__main__':
 	pages = user_prompt()
+	main()
 
-	print(search(pages[0], pages[1]))
-
-main()
-wikipedia.donate()
+#wikipedia.donate()
