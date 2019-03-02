@@ -27,18 +27,38 @@ def user_prompt():
 
 	return (start_page, end_page)
 
-def main():
-	pages = user_prompt()
-	curr = wikiepdia.page(pages[0])
-	target = wikiepdia.page(pages[1])
-
-	search(curr, target)
 
 def search(curr, target):
 	path = []
 
-	while not base_case(curr, target):
+	while curr != target:
+		path.append(curr)
+		curr = find_best_page(curr.list, target)
+
+	path.append(curr)
+
+	return path
+
+def find_best_page(pages, target):
+	max_score = 0
+	best_page = None
+	#find the best page
+	for page in pages:
+		curr_score = score(page, target)
+		if curr_score > max_score:
+			max_score = curr_score
+			best_page = page
+
+	return best_page
+
+def score(page, target):
+	
+
+def main():
+	pages = user_prompt()
+	curr = wikipedia.page(pages[0])
+	target = wikipedia.page(pages[1])
 
 
-def base_case(curr, target):
 
+main()
