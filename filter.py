@@ -2,7 +2,7 @@ import wikipedia
 import spacy
 from operator import itemgetter
 
-top_number = 2
+top_number = 20
 nlp = spacy.load('en_core_web_md')
 
 def clean(page_text):
@@ -48,9 +48,7 @@ def most_relevant(list_links, list_words):
 
 
 
-x = ["boo","bleg","bloop","blorp"]
-y = ["dasd","sdasd","asdas","asdasd","hgrwfw"]
-print(most_relevant(x,y))
+
 #list of links
 #compares against list of words from a target page
 #Find the top 20
