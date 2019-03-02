@@ -6,9 +6,10 @@ top_number = 20
 nlp = spacy.load('en_core_web_md')
 
 def clean(page_text):
-	print(1)
-	doc = nlp(wikipedia.page(page_text).content)
-	print(2)
+	try:
+		doc = nlp(wikipedia.summary(page_text))
+	except wikipedia.exceptions.PageError as error:
+		return []
 	filtered_text = []
 	for token in doc:
 		if token.pos_ == "NUM" or token.pos_ == "PROPN" or token.pos_ == "NOUN":
@@ -17,6 +18,8 @@ def clean(page_text):
 		    #else:
 		    filtered_text.append(token)
 	return filtered_text
+
+
 
 def to_tokens_list(string_list):
 	return [Token.__init__(s) for s in string_list]

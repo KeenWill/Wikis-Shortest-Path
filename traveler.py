@@ -81,8 +81,16 @@ def find_best_page(pages, target_words):
 	return best_page
 
 def score(page_name, target_words):
+	#list of filtered tokens from page summary
 	curr_words = clean(page_name)
-	print(page_name)
+
+	score = 0
+	print(len(curr_words))
+	for curr_token in curr_words:
+		for target_token in target_words:
+			score += curr_token.similarity(target_token)
+
+	print(page_name, score)
 	return 0
 
 
