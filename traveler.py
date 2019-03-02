@@ -1,29 +1,47 @@
 import wikipedia
-from filter import clean
+from filter import clean, most_relevant
 import spacy
 
 #Prompts user for the start and end pages, and returns in a tuple
 def user_prompt():
-	#prompt user for start page
-	start_page = input("Enter start page\n")
-	#give 3 options
-	results = wikipedia.search(start_page, results=3)
-	print("Select one of the results by pressing 1 - 3")
-	user_pick = input(str(results) + "\n")
-	print()
-	start_page = results[int(user_pick) - 1]
+	start_page = None
+	while start_page == None:
+		#prompt user for start page
+		start_page = input("Enter start page\n")
+		#give 3 options
+		results = wikipedia.search(start_page, results=3)
+		print("Select one of the results by pressing 1 - 3")
+		user_pick = input(str(results) + "\n")
+		print()
+		start_page = results[int(user_pick) - 1]
+
+		#check valid page
+		try:
+			wikipedia.page(start_page)
+		except wikipedia.exceptions.DisambiguationError as error:
+			print("try again, ambiguous page picked")
+			start_page = None
 	#print the option they picked
 	print("You picked " + start_page + " as your start page")
 
 	#prompt user for start page
-	end_page = input("Enter end page\n")
-	#give 3 options
-	results = wikipedia.search(end_page, results=3)
-	print("Select one of the results by pressing 1 - 3")
-	print()
-	user_pick = input(str(results) + "\n")
-	print()
-	end_page = results[int(user_pick) - 1]
+	end_page = None
+	while end_page == None:
+		end_page = input("Enter end page\n")
+		#give 3 options
+		results = wikipedia.search(end_page, results=3)
+		print("Select one of the results by pressing 1 - 3")
+		print()
+		user_pick = input(str(results) + "\n")
+		print()
+		end_page = results[int(user_pick) - 1]
+
+		#check valid page
+		try:
+			wikipedia.page(end_page)
+		except wikipedia.exceptions.DisambiguationError as error:
+			print("try again, ambiguous page picked")
+			end_page = None
 	#print the option they picked
 	print("You picked " + end_page + " as your end page")
 
@@ -36,8 +54,12 @@ def search(curr, target):
 
 	while curr != target:
 		path.append(curr)
-		curr_obj = wikipedia.page(curr)
-		curr = find_best_page(curr_obj.links, target_words)
+		#gets all links from the current page
+		all_links = wikipedia.page(curr).links
+		#filters down the links to the best 20
+		best_links = most_relevant(all_links, target_words)
+		#finds the best page from the top 20
+		curr = find_best_page(best_links, target_words)
 
 	path.append(curr)
 
@@ -63,6 +85,7 @@ def score(page_name, target_words):
 
 def main():
 	pages = user_prompt()
+
 	search(pages[0], pages[1])
 
 main()
