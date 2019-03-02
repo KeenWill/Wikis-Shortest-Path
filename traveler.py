@@ -1,5 +1,5 @@
 import wikipedia
-from filter import clean, most_relevant
+from filter import clean
 import spacy
 
 #Prompts user for the start and end pages, and returns in a tuple
@@ -61,43 +61,47 @@ def search(curr, target):
 		#links_and_scores = most_relevant(all_links, target_words)
 		#best_links = [str(x[0]) for x in links_and_scores]
 		#finds the best page from the top 20
-		curr = find_best_page(all_links, target_words)
-		break;
+		curr = find_best_page(all_links, target_words, target)
 
 	path.append(curr)
 
 	return path
 
-def find_best_page(pages, target_words):
+def find_best_page(pages, target_words, target):
 	max_score = 0
 	best_page = None
 	#find the best page
 	for page in pages:
+		#direct link
+		if page == target:
+			return page
+		
 		curr_score = score(page, target_words)
 		if curr_score > max_score:
 			max_score = curr_score
 			best_page = page
 
-	return best_page
+	return page
 
 def score(page_name, target_words):
 	#list of filtered tokens from page summary
 	curr_words = clean(page_name)
 
 	score = 0
-	print(len(curr_words))
 	for curr_token in curr_words:
 		for target_token in target_words:
 			score += curr_token.similarity(target_token)
 
-	print(page_name, score)
-	return 0
+	#adjust the weight by page length
+	if len(curr_words) != 0:
+		score = score / len(curr_words)
+	return score
 
 
 def main():
 	pages = user_prompt()
 
-	search(pages[0], pages[1])
+	print(search(pages[0], pages[1]))
 
 main()
 wikipedia.donate()
