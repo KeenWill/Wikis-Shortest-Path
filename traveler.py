@@ -56,10 +56,13 @@ def search(curr, target):
 		path.append(curr)
 		#gets all links from the current page
 		all_links = wikipedia.page(curr).links
+
 		#filters down the links to the best 20
-		best_links = most_relevant(all_links, target_words)
+		#links_and_scores = most_relevant(all_links, target_words)
+		#best_links = [str(x[0]) for x in links_and_scores]
 		#finds the best page from the top 20
-		curr = find_best_page(best_links, target_words)
+		curr = find_best_page(all_links, target_words)
+		break;
 
 	path.append(curr)
 
