@@ -1,4 +1,5 @@
 import wikipedia
+from filter import Filter
 
 #Prompts user for the start and end pages, and returns in a tuple
 def user_prompt():
@@ -30,35 +31,40 @@ def user_prompt():
 
 def search(curr, target):
 	path = []
+	target_words = Filter(target).get_filtered_text()
+	print("target words are\n")
+	print(target_words)
 
 	while curr != target:
 		path.append(curr)
-		curr = find_best_page(curr.list, target)
+		curr = find_best_page(curr.list, target_words)
 
 	path.append(curr)
 
 	return path
 
-def find_best_page(pages, target):
+def find_best_page(pages, target_words):
 	max_score = 0
 	best_page = None
 	#find the best page
 	for page in pages:
-		curr_score = score(page, target)
+		curr_score = score(str(page), target_words)
 		if curr_score > max_score:
 			max_score = curr_score
 			best_page = page
 
 	return best_page
 
-def score(page, target):
-	
+def score(page_name, target_words):
+	curr_words = Filter(page_name).get_filtered_text()
+	print(curr_words)
+	return 0
+
 
 def main():
-	pages = user_prompt()
-	curr = wikipedia.page(pages[0])
-	target = wikipedia.page(pages[1])
-
+	#pages = user_prompt()
+	#search(pages[0].title, pages[1].title)
+	search("IPhone", "Monty Python")
 
 
 main()
