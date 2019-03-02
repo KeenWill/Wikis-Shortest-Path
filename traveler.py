@@ -60,5 +60,4 @@ def main():
 	target = wikipedia.page(pages[1])
 
 
-
 main()
