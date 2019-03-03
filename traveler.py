@@ -3,57 +3,15 @@ from filter import clean
 import spacy
 from concurrent.futures import ThreadPoolExecutor
 
-ans = []
-
-#pages = None
-
-#Prompts user for the start and end pages, and returns in a tuple
-def user_prompt():
-	start_page = None
-	while start_page == None:
-		#prompt user for start page
-		start_page = input("Enter start page\n")
-		#give 3 options
-		results = wikipedia.search(start_page, results=3)
-		print("Select one of the results by pressing 1 - 3")
-		user_pick = input(str(results) + "\n")
-		print()
-		start_page = results[int(user_pick) - 1]
-
-		#check valid page
-		try:
-			wikipedia.page(start_page)
-		except wikipedia.exceptions.DisambiguationError as error:
-			print("try again, ambiguous page picked")
-			start_page = None
-	#print the option they picked
-	print("You picked " + start_page + " as your start page")
-
-	#prompt user for start page
-	end_page = None
-	while end_page == None:
-		end_page = input("Enter end page\n")
-		#give 3 options
-		results = wikipedia.search(end_page, results=3)
-		print("Select one of the results by pressing 1 - 3")
-		print()
-		user_pick = input(str(results) + "\n")
-		print()
-		end_page = results[int(user_pick) - 1]
-
-		#check valid page
-		try:
-			wikipedia.page(end_page)
-		except wikipedia.exceptions.DisambiguationError as error:
-			print("try again, ambiguous page picked")
-			end_page = None
-	#print the option they picked
-	print("You picked " + end_page + " as your end page")
-
-	return (start_page, end_page)
-
 def wiki_search(query):
-	return wikipedia.search(query, results=3)
+	results_list =  wikipedia.search(query, results=3)
+
+	#ensure 3 elements
+	while len(results_list) > 0 and len(results_list) < 3:
+		results_list.append("")
+		
+	print(results_list)
+	return results_list
 
 def is_valid(page):
 	try:
@@ -75,10 +33,6 @@ def search(curr, target):
 		#gets all links from the current page
 		all_links = wikipedia.page(curr).links
 
-		#filters down the links to the best 20
-		#links_and_scores = most_relevant(all_links, target_words)
-		#best_links = [str(x[0]) for x in links_and_scores]
-		#finds the best page from the top 20
 		curr = find_best_page(all_links, target_words, target, path)
 
 	path.append(curr)
@@ -166,10 +120,3 @@ def main(page1, page2):
 	executor = ThreadPoolExecutor(max_workers = 10)
 	task1 = executor.submit(execute(pages))
 
-
-
-#if __name__ == '__main__':
-	#pages = user_prompt()
-	#main()
-
-#wikipedia.donate()
