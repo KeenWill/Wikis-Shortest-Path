@@ -120,7 +120,7 @@ class main_Graphics(tk.Frame):
 			#traveler.option_indicator(2)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
-			step_1()
+			self.step_1()
 
 
 	def step_4(self):
