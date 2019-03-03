@@ -223,10 +223,11 @@ class main_Graphics(tk.Frame):
 		self.label_load.grid_remove()
 		self.butt_next.grid_remove()
 
-		self.results = traveler.get_ans()
-		
 		self.label_start = tk.Label(self)
-		self.label_start["text"] = str(self.results)
+		#get result from file I/O
+		f = open("results.txt", "r")
+		self.label_start["text"] = ("Found Path! " + f.read())
+		f.close()
 		self.label_start.grid(row = 0, column = 1)
 
 
