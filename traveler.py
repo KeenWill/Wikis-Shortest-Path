@@ -3,6 +3,8 @@ from filter import clean
 import spacy
 from concurrent.futures import ThreadPoolExecutor
 
+#pages = None
+
 #Prompts user for the start and end pages, and returns in a tuple
 def user_prompt():
 	start_page = None
@@ -50,9 +52,11 @@ def user_prompt():
 
 
 def search(curr, target):
+	print("Got here")
 	path = []
+	print("Search before clean")
 	target_words = clean(target)
-
+	print("search after clean")
 	while curr != target:
 		print("next page is: ", curr)
 		path.append(curr)
@@ -66,7 +70,6 @@ def search(curr, target):
 		curr = find_best_page(all_links, target_words, target, path)
 
 	path.append(curr)
-
 	print(path)
 
 def find_best_page(pages, target_words, target, path):
@@ -122,23 +125,34 @@ def score(page_name, target_words, target):
 	#if the target page's name appears in the summary, increase points by 5
 	if bonus:
 		score += 20
-
+	
 	print(page_name, score)
 
 	return score
 
 
 
-def execute():
+def execute(pages):
+	print("accessed execute")
+	print(pages)
 	search(pages[0], pages[1])
 
-def main():
-	executor = ThreadPoolExecutor(max_workers = 10)
-	task1 = executor.submit(execute)
+#ASDAS
+def main(page1, page2):
+	print("access main")
+
+	pages = (page1, page2)
+
+	print("pages assigned")
+	print(pages)
+	execute(pages)
+	#executor = ThreadPoolExecutor(max_workers = 10)
+	#task1 = executor.submit(execute)
 
 
-if __name__ == '__main__':
-	pages = user_prompt()
-	main()
+
+#if __name__ == '__main__':
+	#pages = user_prompt()
+	#main()
 
 #wikipedia.donate()
