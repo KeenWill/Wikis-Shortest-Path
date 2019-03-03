@@ -2,16 +2,20 @@
 ## Summary
 The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the program will determine an efficient path of links that one can take from one article to the other. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which pages are most relevant, and thus would bring the Wiki-Traveler closer to the goal.
 
+## How to run:
+0. Have python3 and pip installed
+1. Download the WTS.zip folder and extract
+2. From terminal, cd into the downloaded folder
+3. run 
+
 For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
 
 ## APIs/Frameworks:
 The TWP program is written entirely in Python 3 to make use of the extensive I/O and NLP libraries available in the language. The wikipedia API allows quick access to any given article's information: including the article length, article summary, links listed on the page, etc. The program relies on this API to traverse the graph of Wikipedia pages by updating the current page it is visiting. Another essential library is the spaCy NLP library. spaCy is extremely powerful in that it provides very effective breakdown of natural language text into Tokens. Token objects can then be compared to each other to figure out the relevancy between two or more texts. Finally, the GUI is built on the Tkinter library to create a native interface.
 
-### Main Dependencies:
-wikipedia
-spacy
-tkinter
-concurrent.futures
+### External Dependencies:
+1. wikipedia
+2. spacy
 
 ## Graph Traversal:
 The graph traversal algorithm is a greedy algorithm that starts at the starting node (page), and advances to its best adjacent page. The best page to pick is determined through a series of NLP processing. First, every link that the current page has is collected from the wikipedia API. For every page that the link points to, the summary is retrieved for that page and is cleaned: menial words such as articles, adjectives, prepositions, etc. are removed. 
