@@ -47,6 +47,10 @@ class main_Graphics(tk.Frame):
 		#Gets an option list
 		self.option_list = traveler.wiki_search(self.starting_page)
 		
+		if len(self.option_list) != 3:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
+			self.step_1()
+
 		#Labeled Button with Option 1
 		self.butt1 = tk.Button(self)
 		self.butt1["text"] = self.option_list[0]
@@ -124,7 +128,7 @@ class main_Graphics(tk.Frame):
 
 		self.label_target = tk.Label(self)
 		self.label_target["text"] = "Enter The Target Page"
-		self.label_target.grid(row = 0, column = 0)
+		self.label_target.grid(row = 0, column = 1)
 
 		self.target_page = tk.Entry(self)
 		self.target_page.grid(row = 1, column = 1)
@@ -258,6 +262,14 @@ class main_Graphics(tk.Frame):
 		search_thread.join()
 
 	def init_thread(self):
+		self.butt_next.grid_remove()
+		
+		self.label_load = tk.Label(self)
+		self.label_load["text"] = "Loading: Sit Back And Relax\n(Approx: 30 min)"
+		self.label_load.grid(row = 0, column = 1)
+		
+
+
 		search_thread = threading.Thread(target = self.start_search)
 		search_thread.start()
 		
