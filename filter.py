@@ -8,7 +8,7 @@ nlp = spacy.load('en_core_web_md')
 def clean(page_text):
 	try:
 		doc = nlp(wikipedia.summary(page_text))
-	except wikipedia.exceptions.PageError as error:
+	except:
 		return []
 	filtered_text = []
 	for token in doc:
