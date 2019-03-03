@@ -145,9 +145,9 @@ def main(page1, page2):
 
 	print("pages assigned")
 	print(pages)
-	execute(pages)
-	#executor = ThreadPoolExecutor(max_workers = 10)
-	#task1 = executor.submit(execute)
+	#execute(pages)
+	executor = ThreadPoolExecutor(max_workers = 10)
+	task1 = executor.submit(execute(pages))
 
 
 
