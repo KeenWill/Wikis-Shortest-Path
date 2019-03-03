@@ -224,6 +224,7 @@ class main_Graphics(tk.Frame):
 		self.butt_next.grid_remove()
 
 		self.results = traveler.get_ans()
+		
 		self.label_start = tk.Label(self)
 		self.label_start["text"] = str(self.results)
 		self.label_start.grid(row = 0, column = 1)
