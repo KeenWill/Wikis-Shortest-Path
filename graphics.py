@@ -214,10 +214,21 @@ class main_Graphics(tk.Frame):
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
+	
+	
 
 	def start_search(self):
 		traveler.main(self.chosen, self.chosen1)
-		search_thread.join()
+
+		self.label_load.grid_remove()
+		self.butt_next.grid_remove()
+
+		self.results = traveler.get_ans()
+		self.label_start = tk.Label(self)
+		self.label_start["text"] = str(self.results)
+		self.label_start.grid(row = 0, column = 1)
+
+
 
 	def init_thread(self):
 		self.butt_next.grid_remove()
@@ -227,7 +238,7 @@ class main_Graphics(tk.Frame):
 		self.label_load.grid(row = 0, column = 1)
 		
 
-
+		
 		search_thread = threading.Thread(target = self.start_search)
 		search_thread.start()
 		
