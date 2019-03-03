@@ -51,6 +51,11 @@ class main_Graphics(tk.Frame):
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
 
+		#Lebel showing options
+		self.label_select = tk.Label(self)
+		self.label_select["text"] = "Select One:"
+		self.label_select.grid(row = 1, column = 2)
+
 		#Labeled Button with Option 1
 		self.butt1 = tk.Button(self)
 		self.butt1["text"] = self.option_list[0]
@@ -73,6 +78,8 @@ class main_Graphics(tk.Frame):
 	def step_3_1(self):
 		self.chosen = self.butt1['text']
 
+		self.label_select.grid_remove()
+		self.label_select.grid_remove()
 		self.butt1.grid_remove()
 		self.butt2.grid_remove()
 		self.butt3.grid_remove()
@@ -90,6 +97,7 @@ class main_Graphics(tk.Frame):
 	def step_3_2(self):
 		self.chosen = self.butt2['text']
 
+		self.label_select.grid_remove()
 		self.butt1.grid_remove()
 		self.butt2.grid_remove()
 		self.butt3.grid_remove()
@@ -106,6 +114,7 @@ class main_Graphics(tk.Frame):
 	def step_3_3(self):
 		self.chosen = self.butt3['text']
 
+		self.label_select.grid_remove()
 		self.butt1.grid_remove()
 		self.butt2.grid_remove()
 		self.butt3.grid_remove()
@@ -147,6 +156,10 @@ class main_Graphics(tk.Frame):
 		#Gets an option list
 		self.option_list = traveler.wiki_search(self.target_page_string)
 		
+		#Label
+		self.label_select = tk.Label(self)
+		self.label_select["text"] = "Select One:"
+		self.label_select.grid(row = 1, column = 2)
 		#Labeled Button with Option 1
 		self.butt4 = tk.Button(self)
 		self.butt4["text"] = self.option_list[0]
@@ -169,13 +182,14 @@ class main_Graphics(tk.Frame):
 	def step_6_1(self):
 		self.chosen1 = self.butt4['text']
 
+		self.label_select.grid_remove()
 		self.butt4.grid_remove()
 		self.butt5.grid_remove()
 		self.butt6.grid_remove()
 
 		if (traveler.is_valid(self.chosen1)):
 			self.butt_next = tk.Button(self)
-			self.butt_next["text"] = "NEXT"
+			self.butt_next["text"] = "Begin Search"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
 		else:
@@ -185,13 +199,14 @@ class main_Graphics(tk.Frame):
 	def step_6_2(self):
 		self.chosen1 = self.butt5['text']
 
+		self.label_select.grid_remove()
 		self.butt4.grid_remove()
 		self.butt5.grid_remove()
 		self.butt6.grid_remove()
 
 		if (traveler.is_valid(self.chosen1)):
 			self.butt_next = tk.Button(self)
-			self.butt_next["text"] = "NEXT"
+			self.butt_next["text"] = "Begin Search"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
 		else:
@@ -201,13 +216,14 @@ class main_Graphics(tk.Frame):
 	def step_6_3(self):
 		self.chosen1 = self.butt5['text']
 
+		self.label_select.grid_remove()
 		self.butt4.grid_remove()
 		self.butt5.grid_remove()
 		self.butt6.grid_remove()
 
 		if (traveler.is_valid(self.chosen1)):
 			self.butt_next = tk.Button(self)
-			self.butt_next["text"] = "NEXT"
+			self.butt_next["text"] = "Begin Search"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
 		else:
