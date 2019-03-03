@@ -11,24 +11,24 @@ class main_Graphics(tk.Frame):
 		self.master = master
 		self.pack()
 		master.pack_propagate(0)
-		master.geometry('500x400')
+		#Set Window Size
+		master.geometry('800x400')
 		self.step_1()
 
 		#self.create_widgets()
 
 	#Display User Input for Starting Page
 	def step_1(self):
-
-
+		#Add Label that Prompts to Enter Starting Page
 		self.label_start = tk.Label(self)
 		self.label_start["text"] = "Enter The Starting Page"
-		self.label_start.grid(row = 0, column = 0)
-
+		self.label_start.grid(row = 0, column = 1)
 
 		#Starting Page TEXT ENTRY
 		self.start_page = tk.Entry(self)
 		self.start_page.grid(row = 1, column = 1)
 
+		#NEXT Button
 		self.start_button = tk.Button(self)
 		self.start_button["text"] = "NEXT"
 		self.start_button["command"] = self.step_2
@@ -80,6 +80,7 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(0)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
 
 
@@ -97,6 +98,7 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(1)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
 
 	def step_3_3(self):
@@ -113,6 +115,7 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(2)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			step_1()
 
 
@@ -176,6 +179,7 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(0)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
 	def step_6_2(self):
@@ -192,6 +196,7 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(1)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
 	def step_6_3(self):
@@ -208,6 +213,7 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(2)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
 
