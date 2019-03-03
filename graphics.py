@@ -82,7 +82,6 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(0)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
@@ -100,7 +99,6 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(1)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
@@ -117,7 +115,6 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(2)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
@@ -181,7 +178,6 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(0)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
@@ -198,7 +194,6 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(1)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
@@ -215,46 +210,9 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(2)
 		else:
 			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
-
-
-
-
-	#def create_widgets(self):
-
-
-
-		#Starting Page TEXT ENTRY
-		#self.start_page = tk.Entry(self)
-		#self.start_page.grid(row = 1, column = 1)
-
-		#Target Page TEXT ENTRY
-		#self.end_page = tk.Entry(self)
-		#self.end_page.grid(row = 0, column = 1)
-		
-		#Entry Text Label 
-		#self.label_start = tk.Label(self)
-		#self.label_start["text"] = "Enter The Starting Page"
-		#self.label_start.grid(row = 0, column = 0)
-
-		#Target Page Text Label
-		#self.label_target = tk.Label(self)
-		#self.label_target["text"] = "Enter The Target Page"
-		#self.label_target.grid(row = 1, column = 0)
-
-		#Results Label
-		#self.results_label = tk.Label(self)
-		#self.results_label["text"] = "-------"
-		#self.results_label.grid(row = 4, column = 1)
-
-		#Labeled Button to search the texts
-		#self.message = tk.Button(self)
-		#self.message["text"] = "SEARCH!"
-		#self.message["command"] = self.init_thread
-		#self.message.grid(row = 2, column = 1)
 
 
 	def start_search(self):
@@ -272,9 +230,6 @@ class main_Graphics(tk.Frame):
 
 		search_thread = threading.Thread(target = self.start_search)
 		search_thread.start()
-		
-
-
 		
 
 root = tk.Tk()
