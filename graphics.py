@@ -2,14 +2,16 @@ import tkinter as tk
 import tkinter.messagebox
 import traveler
 import threading
-from functools import partial
+
 
 class main_Graphics(tk.Frame):
 	def __init__(self, master=None):
 		super().__init__(master)
+		
 		self.master = master
 		self.pack()
-
+		master.pack_propagate(0)
+		master.geometry('500x400')
 		self.step_1()
 
 		#self.create_widgets()
@@ -43,7 +45,7 @@ class main_Graphics(tk.Frame):
 		self.label_start.grid_remove()
 
 		#Gets an option list
-		self.option_list = traveler.wiki_search(starting_page)
+		self.option_list = traveler.wiki_search(self.starting_page)
 		
 		#Labeled Button with Option 1
 		self.butt1 = tk.Button(self)
@@ -65,25 +67,24 @@ class main_Graphics(tk.Frame):
 
 
 	def step_3_1(self):
-		self.chosen = self.butt1.get()
+		self.chosen = self.butt1['text']
 
 		self.butt1.grid_remove()
 		self.butt2.grid_remove()
 		self.butt3.grid_remove()
 
-		if (traveler.is_valid(chosen)):
+		if (traveler.is_valid(self.chosen)):
 			self.butt_next = tk.Button(self)
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(0)
 		else:
-			self.destroy()
-			step_1()
+			self.step_1()
 
 
 	def step_3_2(self):
-		self.chosen = self.butt2.get()
+		self.chosen = self.butt2['text']
 
 		self.butt1.grid_remove()
 		self.butt2.grid_remove()
@@ -96,11 +97,10 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(1)
 		else:
-			self.destroy()
-			step_1()
+			self.step_1()
 
 	def step_3_3(self):
-		self.chosen = self.butt3.get()
+		self.chosen = self.butt3['text']
 
 		self.butt1.grid_remove()
 		self.butt2.grid_remove()
@@ -113,7 +113,6 @@ class main_Graphics(tk.Frame):
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(2)
 		else:
-			self.destroy()
 			step_1()
 
 
@@ -129,20 +128,20 @@ class main_Graphics(tk.Frame):
 
 		self.target_button = tk.Button(self)
 		self.target_button["text"] = "NEXT!"
-		self.target_button["command"] = self.step_2
+		self.target_button["command"] = self.step_5
 		self.target_button.grid(row = 2, column = 1)
 
 
 	def step_5(self):
 		#gets the start page from the input
-		self.target_page = self.target_page.get()
+		self.target_page_string = self.target_page.get()
 		
 		self.target_page.grid_remove()
 		self.target_button.grid_remove()
 		self.label_target.grid_remove()
 
 		#Gets an option list
-		self.option_list = traveler.wiki_search(starting_page)
+		self.option_list = traveler.wiki_search(self.target_page_string)
 		
 		#Labeled Button with Option 1
 		self.butt4 = tk.Button(self)
@@ -163,8 +162,8 @@ class main_Graphics(tk.Frame):
 		self.butt6.grid(row = 2, column = 3)
 
 
-def step_6_1(self):
-		self.chosen1 = self.butt4.get()
+	def step_6_1(self):
+		self.chosen1 = self.butt4['text']
 
 		self.butt4.grid_remove()
 		self.butt5.grid_remove()
@@ -173,16 +172,14 @@ def step_6_1(self):
 		if (traveler.is_valid(self.chosen1)):
 			self.butt_next = tk.Button(self)
 			self.butt_next["text"] = "NEXT"
-			self.butt_next["command"] = self.step_7
+			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(0)
 		else:
-			self.destroy()
-			step_1()
-
+			self.step_4()
 
 	def step_6_2(self):
-		self.chosen1 = self.butt5.get()
+		self.chosen1 = self.butt5['text']
 
 		self.butt4.grid_remove()
 		self.butt5.grid_remove()
@@ -191,15 +188,14 @@ def step_6_1(self):
 		if (traveler.is_valid(self.chosen1)):
 			self.butt_next = tk.Button(self)
 			self.butt_next["text"] = "NEXT"
-			self.butt_next["command"] = self.step_7
+			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(1)
 		else:
-			self.destroy()
-			step_1()
+			self.step_4()
 
 	def step_6_3(self):
-		self.chosen1 = self.butt3.get()
+		self.chosen1 = self.butt5['text']
 
 		self.butt4.grid_remove()
 		self.butt5.grid_remove()
@@ -208,15 +204,12 @@ def step_6_1(self):
 		if (traveler.is_valid(self.chosen1)):
 			self.butt_next = tk.Button(self)
 			self.butt_next["text"] = "NEXT"
-			self.butt_next["command"] = self.step_7
+			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
 			#traveler.option_indicator(2)
 		else:
-			self.destroy()
-			step_1()
+			self.step_4()
 
-	def step_7(self):
-		start_search()
 
 
 
