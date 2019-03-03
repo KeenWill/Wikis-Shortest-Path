@@ -54,6 +54,7 @@ def search(curr, target):
 	target_words = clean(target)
 
 	while curr != target:
+		print("next page is: ", curr)
 		path.append(curr)
 		#gets all links from the current page
 		all_links = wikipedia.page(curr).links
@@ -62,39 +63,65 @@ def search(curr, target):
 		#links_and_scores = most_relevant(all_links, target_words)
 		#best_links = [str(x[0]) for x in links_and_scores]
 		#finds the best page from the top 20
-		curr = find_best_page(all_links, target_words, target)
+		curr = find_best_page(all_links, target_words, target, path)
 
 	path.append(curr)
 
-	return path
+	print(path)
 
-def find_best_page(pages, target_words, target):
+def find_best_page(pages, target_words, target, path):
 	max_score = 0
 	best_page = None
 	#find the best page
 	for page in pages:
+		#avoid cycles
+		if page in path:
+			continue
 		#direct link
 		if page == target:
 			return page
 		
-		curr_score = score(page, target_words)
+		curr_score = score(page, target_words, target)
+		if curr_score == 500:
+			return page
+
 		if curr_score > max_score:
 			max_score = curr_score
 			best_page = page
 
-	return page
+	return best_page
 
-def score(page_name, target_words):
+def score(page_name, target_words, target):
 	#list of filtered tokens from page summary
 	curr_words = clean(page_name)
 	score = 0
+	bonus = False
+	proper_noun_points = 0
 	for curr_token in curr_words:
+		#page's summary contains the target
+		if str(curr_token) == target:
+			print("target in sight")
+			bonus = True
+
 		for target_token in target_words:
+			#always add the similarity points
 			score += curr_token.similarity(target_token)
+			#add bonus 50 if there is a shared proper noun
+			if curr_token.pos_ == "PROPN" and\
+			str(curr_token) == str(target_token):
+				print("found common proper noun", str(curr_token))
+				proper_noun_points += 2
 
 	#adjust the weight by page length
 	if len(curr_words) != 0:
 		score = score / len(curr_words)
+
+	#add the proper noun bonus
+	score += proper_noun_points
+
+	#if the target page's name appears in the summary, increase points by 5
+	if bonus:
+		score += 20
 
 	print(page_name, score)
 
