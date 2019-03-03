@@ -50,6 +50,16 @@ def user_prompt():
 
 	return (start_page, end_page)
 
+def wiki_search(query):
+	return wikipedia.search(query, results=3)
+
+def is_valid(page):
+	try:
+		wikipedia.page(page)
+	except:
+		return False
+	return True
+
 
 def search(curr, target):
 	print("Got here")
