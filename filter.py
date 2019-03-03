@@ -1,7 +1,7 @@
 import wikipedia
 import spacy
 
-top_number = 20
+print("Loading English language...")
 nlp = spacy.load('en_core_web_md')
 
 def clean(page_text):
