@@ -6,7 +6,9 @@ The purpose of this program is to explore the different ways that knowledge is r
 0. Have python3 and pip installed
 1. Download the WTS.zip folder and extract
 2. From terminal, cd into the downloaded folder
-3. run 
+3. run pip install wikipedia and pip install spacy (otherwise, pip install -U spacy)
+4. run python3 -m spacy download en_core_web_md (for windows replace python3 with python)
+5. run python3 graphics.py (same rule applies for windows)
 
 For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
 
