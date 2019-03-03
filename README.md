@@ -2,6 +2,8 @@
 ## Summary
 The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the program will determine an efficient path of links that one can take from one article to the other. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which pages are most relevant, and thus would bring the Wiki-Traveler closer to the goal.
 
+For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
+
 ## How to run:
 0. Have python3 and pip installed
 1. Download the WTS.zip folder and extract
@@ -9,8 +11,6 @@ The purpose of this program is to explore the different ways that knowledge is r
 3. run pip install wikipedia and pip install spacy (otherwise, pip install -U spacy)
 4. run python3 -m spacy download en_core_web_md (for windows replace python3 with python)
 5. run python3 graphics.py (same rule applies for windows)
-
-For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
 
 ## APIs/Frameworks:
 The TWP program is written entirely in Python 3 to make use of the extensive I/O and NLP libraries available in the language. The wikipedia API allows quick access to any given article's information: including the article length, article summary, links listed on the page, etc. The program relies on this API to traverse the graph of Wikipedia pages by updating the current page it is visiting. Another essential library is the spaCy NLP library. spaCy is extremely powerful in that it provides very effective breakdown of natural language text into Tokens. Token objects can then be compared to each other to figure out the relevancy between two or more texts. Finally, the GUI is built on the Tkinter library to create a native interface.
