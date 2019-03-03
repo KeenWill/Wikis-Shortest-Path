@@ -8,9 +8,9 @@ For those who know what the Wikipedia Game is, thie program essentially looks to
 The TWP program is written entirely in Python 3 to make use of the extensive I/O and NLP libraries available in the language. The wikipedia API allows quick access to any given article's information: including the article length, article summary, links listed on the page, etc. The program relies on this API to traverse the graph of Wikipedia pages by updating the current page it is visiting. Another essential library is the spaCy NLP library. spaCy is extremely powerful in that it provides very effective breakdown of natural language text into Tokens. Token objects can then be compared to each other to figure out the relevancy between two or more texts. Finally, the GUI is built on the Tkinter library to create a native interface.
 
 ### Main Dependencies:
-wikipedia
-spacy
-tkinter
+wikipedia\n
+spacy\n
+tkinter\n
 concurrent.futures
 
 ## Graph Traversal:
