@@ -10,7 +10,6 @@ def wiki_search(query):
 	while len(results_list) > 0 and len(results_list) < 3:
 		results_list.append("")
 		
-	print(results_list)
 	return results_list
 
 def is_valid(page):
@@ -22,11 +21,9 @@ def is_valid(page):
 
 
 def search(curr, target):
-	print("Got here")
 	path = []
-	print("Search before clean")
 	target_words = clean(target)
-	print("search after clean")
+	
 	while curr != target:
 		print("next page is: ", curr)
 		path.append(curr)
@@ -36,11 +33,10 @@ def search(curr, target):
 		curr = find_best_page(all_links, target_words, target, path)
 
 	path.append(curr)
-	ans = path
-	
 
-def get_ans():
-	return ans
+	f = open("results.txt", "w")
+	f.write(str(path))
+	f.close
 
 
 def find_best_page(pages, target_words, target, path):
@@ -74,7 +70,6 @@ def score(page_name, target_words, target):
 	for curr_token in curr_words:
 		#page's summary contains the target
 		if str(curr_token) == target:
-			print("target in sight")
 			bonus = True
 
 		for target_token in target_words:
@@ -83,7 +78,6 @@ def score(page_name, target_words, target):
 			#add bonus 50 if there is a shared proper noun
 			if curr_token.pos_ == "PROPN" and\
 			str(curr_token) == str(target_token):
-				print("found common proper noun", str(curr_token))
 				proper_noun_points += 2
 
 	#adjust the weight by page length
@@ -104,18 +98,13 @@ def score(page_name, target_words, target):
 
 
 def execute(pages):
-	print("accessed execute")
-	print(pages)
 	search(pages[0], pages[1])
 	
 
 #ASDAS
 def main(page1, page2):
-	print("access main")
 	pages = (page1, page2)
 
-	print("pages assigned")
-	print(pages)
 	#execute(pages)
 	executor = ThreadPoolExecutor(max_workers = 10)
 	task1 = executor.submit(execute(pages))
