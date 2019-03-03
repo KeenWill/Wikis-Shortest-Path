@@ -3,6 +3,7 @@ from filter import clean
 import spacy
 from concurrent.futures import ThreadPoolExecutor
 
+
 #pages = None
 
 #Prompts user for the start and end pages, and returns in a tuple
@@ -136,11 +137,11 @@ def execute(pages):
 	print("accessed execute")
 	print(pages)
 	search(pages[0], pages[1])
+	
 
 #ASDAS
 def main(page1, page2):
 	print("access main")
-
 	pages = (page1, page2)
 
 	print("pages assigned")
