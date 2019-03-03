@@ -3,6 +3,7 @@ from filter import clean
 import spacy
 from concurrent.futures import ThreadPoolExecutor
 
+ans = []
 
 #pages = None
 
@@ -81,7 +82,12 @@ def search(curr, target):
 		curr = find_best_page(all_links, target_words, target, path)
 
 	path.append(curr)
-	print(path)
+	ans = path
+	
+
+def get_ans():
+	return ans
+
 
 def find_best_page(pages, target_words, target, path):
 	max_score = 0
