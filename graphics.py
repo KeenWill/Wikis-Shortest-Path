@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.messagebox
 import traveler
-
+import threading
 
 class main_Graphics(tk.Frame):
 	def __init__(self, master=None):
@@ -37,11 +37,21 @@ class main_Graphics(tk.Frame):
 		#Labeled Button to search the texts
 		self.message = tk.Button(self)
 		self.message["text"] = "SEARCH!"
-		self.message["command"] = self.say_hi
+		self.message["command"] = self.init_thread
 		self.message.grid(row = 2, column = 1)
 
-	def say_hi(self):
+
+
+	def start_search(self):
 		traveler.main(self.start_page.get(), self.end_page.get())
+		search_thread.join()
+
+	def init_thread(self):
+		search_thread = threading.Thread(target = self.start_search)
+		search_thread.start()
+		
+
+
 		
 
 root = tk.Tk()
