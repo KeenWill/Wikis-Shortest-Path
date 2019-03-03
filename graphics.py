@@ -11,24 +11,24 @@ class main_Graphics(tk.Frame):
 		self.master = master
 		self.pack()
 		master.pack_propagate(0)
-		master.geometry('500x400')
+		#Set Window Size
+		master.geometry('800x400')
 		self.step_1()
 
 		#self.create_widgets()
 
 	#Display User Input for Starting Page
 	def step_1(self):
-
-
+		#Add Label that Prompts to Enter Starting Page
 		self.label_start = tk.Label(self)
 		self.label_start["text"] = "Enter The Starting Page"
-		self.label_start.grid(row = 0, column = 0)
-
+		self.label_start.grid(row = 0, column = 1)
 
 		#Starting Page TEXT ENTRY
 		self.start_page = tk.Entry(self)
 		self.start_page.grid(row = 1, column = 1)
 
+		#NEXT Button
 		self.start_button = tk.Button(self)
 		self.start_button["text"] = "NEXT"
 		self.start_button["command"] = self.step_2
@@ -47,6 +47,10 @@ class main_Graphics(tk.Frame):
 		#Gets an option list
 		self.option_list = traveler.wiki_search(self.starting_page)
 		
+		if len(self.option_list) != 3:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
+			self.step_1()
+
 		#Labeled Button with Option 1
 		self.butt1 = tk.Button(self)
 		self.butt1["text"] = self.option_list[0]
@@ -78,8 +82,8 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(0)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
 
 
@@ -95,8 +99,8 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(1)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_1()
 
 	def step_3_3(self):
@@ -111,9 +115,9 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.step_4
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(2)
 		else:
-			step_1()
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
+			self.step_1()
 
 
 	def step_4(self):
@@ -121,7 +125,7 @@ class main_Graphics(tk.Frame):
 
 		self.label_target = tk.Label(self)
 		self.label_target["text"] = "Enter The Target Page"
-		self.label_target.grid(row = 0, column = 0)
+		self.label_target.grid(row = 0, column = 1)
 
 		self.target_page = tk.Entry(self)
 		self.target_page.grid(row = 1, column = 1)
@@ -174,8 +178,8 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(0)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
 	def step_6_2(self):
@@ -190,8 +194,8 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(1)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
 	def step_6_3(self):
@@ -206,57 +210,38 @@ class main_Graphics(tk.Frame):
 			self.butt_next["text"] = "NEXT"
 			self.butt_next["command"] = self.init_thread
 			self.butt_next.grid(row = 2, column = 1)
-			#traveler.option_indicator(2)
 		else:
+			tkinter.messagebox.showinfo('Error', 'Wikipedia API Disambiguation Error: Please Enter a Different Page')
 			self.step_4()
 
-
-
-
-	#def create_widgets(self):
-
-
-
-		#Starting Page TEXT ENTRY
-		#self.start_page = tk.Entry(self)
-		#self.start_page.grid(row = 1, column = 1)
-
-		#Target Page TEXT ENTRY
-		#self.end_page = tk.Entry(self)
-		#self.end_page.grid(row = 0, column = 1)
-		
-		#Entry Text Label 
-		#self.label_start = tk.Label(self)
-		#self.label_start["text"] = "Enter The Starting Page"
-		#self.label_start.grid(row = 0, column = 0)
-
-		#Target Page Text Label
-		#self.label_target = tk.Label(self)
-		#self.label_target["text"] = "Enter The Target Page"
-		#self.label_target.grid(row = 1, column = 0)
-
-		#Results Label
-		#self.results_label = tk.Label(self)
-		#self.results_label["text"] = "-------"
-		#self.results_label.grid(row = 4, column = 1)
-
-		#Labeled Button to search the texts
-		#self.message = tk.Button(self)
-		#self.message["text"] = "SEARCH!"
-		#self.message["command"] = self.init_thread
-		#self.message.grid(row = 2, column = 1)
-
+	
+	
 
 	def start_search(self):
 		traveler.main(self.chosen, self.chosen1)
-		search_thread.join()
+
+		self.label_load.grid_remove()
+		self.butt_next.grid_remove()
+
+		self.results = traveler.get_ans()
+		
+		self.label_start = tk.Label(self)
+		self.label_start["text"] = str(self.results)
+		self.label_start.grid(row = 0, column = 1)
+
+
 
 	def init_thread(self):
-		search_thread = threading.Thread(target = self.start_search)
-		search_thread.start()
+		self.butt_next.grid_remove()
+		
+		self.label_load = tk.Label(self)
+		self.label_load["text"] = "Loading: Sit Back And Relax\n(Approx: 30 min)"
+		self.label_load.grid(row = 0, column = 1)
 		
 
-
+		
+		search_thread = threading.Thread(target = self.start_search)
+		search_thread.start()
 		
 
 root = tk.Tk()
