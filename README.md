@@ -1,6 +1,6 @@
 # Traveling-Wikipedia-Problem: TWP
 ## Summary
-The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the program will determine an efficient path of links that one can take from one article to the other. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which pages are most relevant, and thus would bring the Wiki-Traveler closer to the goal.
+The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the Traveling Wikipedia Problem program will find an efficient path of links between the two articles. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which neighboring pages are most relevant, and thus which neighboring page the Wiki-Traveler should visit next.
 
 For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
 
@@ -13,7 +13,7 @@ For those who know what the Wikipedia Game is, this program essentially looks to
 5. run python3 graphics.py (same rule applies for windows)
 
 ## APIs/Frameworks:
-The TWP program is written entirely in Python 3 to make use of the extensive I/O and NLP libraries available in the language. The wikipedia API allows quick access to any given article's information: including the article length, article summary, links listed on the page, etc. The program relies on this API to traverse the graph of Wikipedia pages by updating the current page it is visiting. Another essential library is the spaCy NLP library. spaCy is extremely powerful in that it provides very effective breakdown of natural language text into Tokens. Token objects can then be compared to each other to figure out the relevancy between two or more texts. Finally, the GUI is built on the Tkinter library to create a native interface.
+The TWP program is written entirely in Python 3 to make use of the extensive I/O and NLP libraries available in the language. The wikipedia API allows quick access to a wikipedia article's information: including the article length, article summary, links listed on the page, etc. The program relies on this API to traverse the graph of Wikipedia pages by updating the current page it is visiting. Another essential library is the spaCy NLP library. spaCy is extremely powerful in that it provides very effective breakdown of natural language text into Tokens. Token objects can then be compared to each other to figure out the relevancy between two or more texts. Finally, the GUI is built on the Tkinter library to create a native interface.
 
 ### External Dependencies:
 1. wikipedia
