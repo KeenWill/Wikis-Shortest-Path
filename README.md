@@ -19,7 +19,9 @@ The WSP program is written entirely in Python 3 to make use of the extensive I/O
 1. wikipedia
 2. spacy
 
-## Graph Traversal:
+## Algorithm:
+![Figure depicting the graph of Wikipedia articles. Source and target nodes refer to the start and end pages. An edge from node a to b denots a having a link to b in its page. n marks the neighboring pages of the current pointer that starts at the source.](https://i.imgur.com/DyXIhR3.png)
+
 The graph traversal algorithm is a greedy algorithm that starts at the starting node (page), and advances to its best adjacent page. The best page to advance to is defined as the page that will bring the program closest to the target page, and is determined through a series of NLP tools. First, every link that the current page has is collected from the wikipedia API. For every page that a link points to, the summary is retrieved for that page and is cleaned: menial words such as articles, adjectives, prepositions, etc. are removed. 
 
 Once the summaries are cleaned, the remaining tokens from each page are compared with the cleaned tokens of the target page. Each pair of token is compared for relevancy and given a score. The average score of all tokens from a given neighbor page is assigned to the overall score for that page (how relevant that page's content is to the target page). However, certain weighted modifiers are taken into account. If a neighbor page contains the title of the target page, that neighbor page's score is increased by a significant factor (although, it is not immediately obvious that that page is the best page. This is because a page can contain the title of the target page, but not a link to it). Any proper nouns that are shared between a neighbor page and the target page increases the neighbor page's score by a smaller margin. We found that the final weights for the score modifiers lead to a very accurate ranking of each neighboring page, and thus allowed the program to find very short paths between any two pages.
