@@ -1,6 +1,6 @@
 # Wiki's Shortest Path: WSP
 ## Summary
-The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the Wiki's Shortest Path program will find an efficient path of links between the two articles. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which neighboring pages are most relevant, and thus which neighboring page the Wiki-Traveler should visit next.
+The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the Wiki's Shortest Path program will find an efficient path of links between the two articles. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which neighboring pages are most relevant, and thus which neighboring page the algorithm should visit next.
 
 For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
 
