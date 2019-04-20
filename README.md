@@ -1,6 +1,6 @@
 # Wiki's Shortest Path: WSP
 ## Summary
-The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the Wiki's Shortest Path program will find an efficient path of links between the two articles. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which neighboring pages are most relevant, and thus which neighboring page the algorithm should visit next.
+The purpose of this program is to explore the different ways that knowledge is related in the vast graph of connected wikipedia articles. Given two wikipedia pages, the Wiki's Shortest Path program uses a heuristic to find an efficient path of links between the two articles. It does this through a combination of directed-graph traversal algorithms and natural language processing techniques to determine the best page to visit next. The NLP library (spaCy) performs relevancy analysis between the current page and the target page to determine which neighboring pages are most relevant, and thus which neighboring page the algorithm should visit next.
 
 For those who know what the Wikipedia Game is, this program essentially looks to efficiently play that game. For the uninitiated, check out the wikipedia article on the wikipedia game here: https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game
 
@@ -23,7 +23,7 @@ The WSP program is written entirely in Python 3 to make use of the extensive I/O
 ![](https://i.imgur.com/DyXIhR3.png)
 This figure depicts the graph of Wikipedia articles. Source and target nodes refer to the start and end pages. An edge from node A to B denotes A's page containing a link to B's page. n marks the neighboring pages of the current pointer that starts at the source.
 
-The graph traversal algorithm is a greedy algorithm that starts at the source node, and advances to its best neighboring page at each step. The best page to advance to is defined as the page that will bring the program closest to the target page, and is determined through a series of NLP tools. The underlying idea is that, the more relevant the contents of a neighboring page is to the taret page, the closer it is to the target page. 
+The graph traversal algorithm is a greedy, heuristic algorithm that starts at the source node, and advances to its best neighboring page at each step. The best page to advance to is defined as the page that will bring the program closest to the target page, and is determined through a series of NLP tools. The underlying idea is that, the more relevant the contents of a neighboring page is to the taret page, the closer it is to the target page. 
 
 First, every link that the current page has is collected from the wikipedia API. For every page that a link points to, the summary is retrieved for that page and is cleaned: menial words such as articles, adjectives, prepositions, etc. are removed. 
 
